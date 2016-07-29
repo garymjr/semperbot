@@ -1,0 +1,23 @@
+{
+  "name": "semperbot",
+  "version": "1.0.0",
+  "description": "Simple discord bot for semper para bellum",
+  "main": "app.js",
+  "dependencies": {
+    "discord.io": "^1.13.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garymjr/semperbot.git"
+  },
+  "author": "Gary Murray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/garymjr/semperbot/issues"
+  },
+  "homepage": "https://github.com/garymjr/semperbot#readme"
+}
