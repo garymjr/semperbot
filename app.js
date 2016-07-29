@@ -14,7 +14,7 @@ bot.on('ready', function(event) {
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
-	console.log(event);
+	console.log([event]);
 	if (message === '!help') {
 		bot.sendMessage({
 			to: channelID,
@@ -34,7 +34,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			next.setDate(date.getDate() + offset);
 			next.setHours(19, 0, 0);
 			time = (next - date) / 1000;
-			hours = Math.round((time / 60) / 60);
+			hours = Math.round(time / 3600);
 			minutes = Math.round((time / 60) - (hours * 60));
 			bot.sendMessage({
 				to: channelID,
