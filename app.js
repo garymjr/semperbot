@@ -14,7 +14,7 @@ bot.on('ready', function(event) {
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
-	console.log([user, userID, channelID, message, event]);
+	console.log(event);
 	if (message === '!help') {
 		bot.sendMessage({
 			to: channelID,
