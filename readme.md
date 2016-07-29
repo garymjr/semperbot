@@ -4,5 +4,7 @@
 Requires nodejs and discord.io
 
 To run type
-	`npm install
-	node app.js`
+```
+npm install
+node app.js
+```
