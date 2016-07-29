@@ -37,6 +37,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			hours = Math.round(time / 3600);
 			minutes = Math.round((time / 60) - (hours * 60));
 			if (minutes < 0) {
+				hours = hours - 1;
 				minutes = minutes + 60;
 			}
 			bot.sendMessage({
