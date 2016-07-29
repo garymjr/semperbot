@@ -36,6 +36,9 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			time = (next - date) / 1000;
 			hours = Math.round(time / 3600);
 			minutes = Math.round((time / 60) - (hours * 60));
+			if (minutes < 0) {
+				minutes = minutes + 60;
+			}
 			bot.sendMessage({
 				to: channelID,
 				message: '<@!' + userID + '> The next raid is in ' + hours + ' hours and ' + minutes + ' minutes'
