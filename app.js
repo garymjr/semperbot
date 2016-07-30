@@ -11,11 +11,16 @@ var COMMANDS = [
 
 bot.on('ready', function(event) {
 	console.log('Logged in as %s - %s\n', bot.username, bot.id);
-	console.log(bot.users)
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
-	console.log([event]);
+	var d = event['d'];
+	console.log({
+		'author': Object.keys(author),
+		'mentions': Object.keys(mentions),
+		'channel_id': d.channel_id,
+		'content': d.content
+	});
 	if (message === '!help') {
 		bot.sendMessage({
 			to: channelID,
