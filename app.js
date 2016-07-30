@@ -47,7 +47,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		}
 		bot.sendMessage({
 			to: channelID,
-			message: mention(userID) + 'Available commands: ' + text
+			message: mention(userID) + ' Available commands: ' + text
 		});
 	} else if (message === '!next') {
 		var date, seconds, hours, minutes;
