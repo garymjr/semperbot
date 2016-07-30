@@ -6,8 +6,22 @@ var bot = new Discord.Client({
 
 var COMMANDS = [
 	'!help',
+	'!next',
 	'!times'
 ];
+
+var RAID_TIMES = [
+	{
+		'day': 'Thursday',
+		'start': '10PM',
+		'end': '12AM'
+	},
+	{
+		'day': 'Saturday',
+		'start': '10PM',
+		'end': '12AM'
+	}
+]
 
 function mention(user_id) {
 	return '<@!' + user_id + '>';
@@ -25,17 +39,17 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		'channel_id': channelID,
 		'content': message
 	});
+
 	if (message === '!help') {
+		var text = '';
+		for (i=0; i < COMMANDS.length; i++) {
+			text += COMMANDS[i] + ', ';
+		}
 		bot.sendMessage({
 			to: channelID,
-			message: mention(userID) + " I'm not very helpful right now"
+			message: mention(userID) + 'Available commands: ' + text
 		});
-	} else if (message === '!poe') {
-		bot.sendMessage({
-			to: channelID,
-			message: mention('125071902556291072') + ' tap tap tap '
-		});
-	} else if (message === '!times') {
+	} else if (message === '!next') {
 		var date, seconds, hours, minutes;
 		var today = new Date();
 		if (today.getDay() === 4 || today.getDay === 6) {
@@ -70,12 +84,26 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		}
 		bot.sendMessage({
 			to: channelID,
-			message: mention(userID) + 'Next raid in ' + hours + ' hours and ' + minutes + ' minutes.'
+			message: mention(userID) + ' Next raid in ' + hours + ' hours and ' + minutes + ' minutes.'
+		});
+	} else if (message === '!times') {
+		var text = '';
+		for (i=0; i < RAID_TIMES.length; i++) {
+			text += RAID_TIMES[i]['day'] + ': ' + RAID_TIMES[i]['start'] + ' - ' + RAID_TIMES[i]['end'] + '\n';
+		}
+		bot.sendMessage({
+			to: channelID,
+			message: mention(userID) + ' Current raid times are: (All times using server time)\n' + text
 		});
 	} else if (message === '!ilovehunters') {
 		bot.sendMessage({
 			to: channelID,
-			message: '<@!207175112691023872> I heard you love hunters!'
+			message: mention('207175112691023872') + ' I heard you love hunters!'
+		});
+	} else if (message === '!poe') {
+		bot.sendMessage({
+			to: channelID,
+			message: mention('125071902556291072') + ' tap tap tap '
 		});
 	}
 });
