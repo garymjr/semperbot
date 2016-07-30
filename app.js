@@ -7,7 +7,9 @@ var bot = new Discord.Client({
 var COMMANDS = [
 	'!help',
 	'!next',
-	'!times'
+	'!times',
+	'!guides',
+	'!videos'
 ];
 
 var RAID_TIMES = [
@@ -21,7 +23,29 @@ var RAID_TIMES = [
 		'start': '10PM',
 		'end': '12AM'
 	}
-]
+];
+
+var GUIDES = [
+	{
+		'zone': 'Blackrock Foundry',
+		'url': 'http://www.icy-veins.com/wow/blackrock-foundry-raid'
+	},
+	{
+		'zone': 'Hellfire Citadel',
+		'url': 'http://www.icy-veins.com/wow/hellfire-citadel-raid'
+	}
+];
+
+var VIDEOS = [
+	{
+		'zone': 'Blackrock Foundry',
+		'url': 'https://www.youtube.com/playlist?list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij'
+	},
+	{
+		'zone': 'Hellfire Citadel',
+		'url': 'https://www.youtube.com/playlist?list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo'
+	}
+];
 
 function mention(user_id) {
 	return '<@!' + user_id + '>';
@@ -94,6 +118,24 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		bot.sendMessage({
 			to: channelID,
 			message: mention(userID) + ' Current raid times are: (All times using server time)\n' + text
+		});
+	} else if (message === '!guides') {
+		var text = '';
+		for (i=0; i < GUIDES.length; i++) {
+			text += 'Zone: ' + GUIDES[i]['zone'] + '\nLink: ' + GUIDES[i]['url'] + '\n'
+		}
+		bot.sendMessage({
+			to: channelID,
+			message: mention(userID) + ' Guides we use:\n' + text
+		});
+	} else if (message === '!videos') {
+		var text = '';
+		for (i=0; i < VIDEOS.length; i++) {
+			text += 'Zone: ' + VIDEOS[i]['zone'] + '\nLink: ' + VIDEOS[i]['url'] + '\n'
+		}
+		bot.sendMessage({
+			to: channelID,
+			message: mention(userID) + ' Videos we watch:\n' + text
 		});
 	} else if (message === '!ilovehunters') {
 		bot.sendMessage({
