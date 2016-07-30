@@ -9,6 +9,10 @@ var COMMANDS = [
 	'!times'
 ];
 
+function mention(user_id) {
+	return '<@!' + user_id + '>';
+}
+
 bot.on('ready', function(event) {
 	console.log('Logged in as %s - %s\n', bot.username, bot.id);
 });
@@ -17,39 +21,57 @@ bot.on('message', function(user, userID, channelID, message, event) {
 	var d = event['d'];
 	console.log({
 		'author': d['author'].id,
-		'channel_id': d['channel_id'],
-		'content': d['content']
+		'user_id': userID,
+		'channel_id': channelID,
+		'content': message
 	});
 	if (message === '!help') {
 		bot.sendMessage({
 			to: channelID,
-			message: "<@!" + userID + "> I'm not very helpful right now"
+			message: mention(userID) + " I'm not very helpful right now"
 		});
 	} else if (message === '!poe') {
 		bot.sendMessage({
 			to: channelID,
-			message: '<@!125071902556291072> tap tap tap'
+			message: mention('125071902556291072') + ' tap tap tap '
 		});
 	} else if (message === '!times') {
-		date = new Date();
-		today = date.getDay();
-		if (today < 6) {
-			offset = 6 - today;
-			next = new Date();
-			next.setDate(date.getDate() + offset);
-			next.setHours(19, 0, 0);
-			time = (next - date) / 1000;
-			hours = Math.round(time / 3600);
-			minutes = Math.round((time / 60) - (hours * 60));
-			if (minutes < 0) {
-				hours = hours - 1;
-				minutes = minutes + 60;
+		var date, seconds, hours, minutes;
+		var today = new Date();
+		if (today.getDay() === 4 || today.getDay === 6) {
+			date = new Date();
+			date.setHours(19, 0, 0);
+			seconds = (date.getTime() - today.getTime()) / 1000;
+
+			// get hours
+			if (seconds >= 3600) {
+				hours = Math.floor(seconds / 3600);
+			} else {
+				hours = 0;
 			}
-			bot.sendMessage({
-				to: channelID,
-				message: '<@!' + userID + '> The next raid is in ' + hours + ' hours and ' + minutes + ' minutes'
-			});
+
+			// get minutes
+			minutes = Math.floor((seconds % 3600) / 60)
+		} else if (today.getDay() === 5) {
+			date = new Date();
+			date.setDate(date.getDate() + 1);
+			date.setHours(19, 0, 0);
+			seconds = (date.getTime() - today.getTime()) / 1000;
+			hours = Math.floor(seconds / 3600);
+			minutes = Math.floor((seconds % 3600) / 60);
+		} else if (today.getDate() < 4) {
+			var offset = 4 - today.getDay();
+			date = new Date();
+			date.setDate(date.getDate() + offset);
+			date.setHours(19, 0, 0);
+			seconds = (date.getTime() - today.getTime()) / 1000;
+			hours = Math.floor(seconds / 3600);
+			minutes = Math.floor((seconds % 3600) / 60);
 		}
+		bot.sendMessage({
+			to: channelID,
+			message: mention(userID) + 'Next raid in ' + hours + ' hours and ' + minutes + ' minutes.'
+		});
 	} else if (message === '!ilovehunters') {
 		bot.sendMessage({
 			to: channelID,
