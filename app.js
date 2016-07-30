@@ -114,7 +114,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			});
 		} else {
 			var result = [];
-			search = message[1].lower();
+			search = message[1].toLowerCase();
 			for (i=0; i < keys.length; i++) {
 				if (keys[i].indexOf(search) !== -1) {
 					result.push(keys[i]);
