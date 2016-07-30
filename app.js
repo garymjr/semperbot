@@ -1,3 +1,4 @@
+var fs = require('fs');
 var Discord = require('discord.io');
 var bot = new Discord.Client({
 	autorun: true,
@@ -25,27 +26,7 @@ var RAID_TIMES = [
 	}
 ];
 
-var GUIDES = [
-	{
-		'zone': 'Blackrock Foundry',
-		'url': 'http://www.icy-veins.com/wow/blackrock-foundry-raid'
-	},
-	{
-		'zone': 'Hellfire Citadel',
-		'url': 'http://www.icy-veins.com/wow/hellfire-citadel-raid'
-	}
-];
-
-var VIDEOS = [
-	{
-		'zone': 'Blackrock Foundry',
-		'url': 'https://www.youtube.com/playlist?list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij'
-	},
-	{
-		'zone': 'Hellfire Citadel',
-		'url': 'https://www.youtube.com/playlist?list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo'
-	}
-];
+var GUIDES = JSON.parse(fs.readFileSync('guides.json', 'utf8'));
 
 function mention(user_id) {
 	return '<@!' + user_id + '>';
@@ -56,6 +37,7 @@ bot.on('ready', function(event) {
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
+	message = message.split(' ');
 	var d = event['d'];
 	console.log({
 		'author': d['author'].id,
@@ -64,7 +46,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		'content': message
 	});
 
-	if (message === '!help') {
+	if (message[0] === '!help') {
 		var text = '';
 		for (i=0; i < COMMANDS.length; i++) {
 			text += COMMANDS[i] + ', ';
@@ -73,7 +55,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			to: channelID,
 			message: mention(userID) + ' Available commands: ' + text
 		});
-	} else if (message === '!next') {
+	} else if (message[0] === '!next') {
 		var date, seconds, hours, minutes;
 		var today = new Date();
 		if (today.getDay() === 4 || today.getDay() === 6) {
@@ -110,7 +92,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			to: channelID,
 			message: mention(userID) + ' Next raid in ' + hours + ' hours and ' + minutes + ' minutes.'
 		});
-	} else if (message === '!times') {
+	} else if (message[0] === '!times') {
 		var text = '';
 		for (i=0; i < RAID_TIMES.length; i++) {
 			text += RAID_TIMES[i]['day'] + ': ' + RAID_TIMES[i]['start'] + ' - ' + RAID_TIMES[i]['end'] + '\n';
@@ -119,24 +101,42 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			to: channelID,
 			message: mention(userID) + ' Current raid times are: (All times using server time)\n' + text
 		});
-	} else if (message === '!guides') {
+	} else if (message[0] === '!guides') {
 		var text = '';
-		for (i=0; i < GUIDES.length; i++) {
-			text += 'Zone: ' + GUIDES[i]['zone'] + '\nLink: ' + GUIDES[i]['url'] + '\n'
+		var keys = Object.keys(GUIDES);
+		if (message.length === 1) {
+			for (i=0; i < keys.length; i++) {
+				text += keys[i] + ', '
+			}
+			bot.sendMessage({
+				to: channelID,
+				message: mention(userID) + ' Guides available for ' + test
+			});
+		} else {
+			var result = [];
+			search = message[1].lower();
+			for (i=0; i < keys.length; i++) {
+				if (keys[i].indexOf(search) !== -1) {
+					result.push(keys[i]);
+				}
+			}
+
+			if (result.length >= 1) {
+				bot.sendMessage({
+					to: channelID,
+					message: mention(userID) + ' Guides found:'
+				});
+
+				for (i=0; i < result.length; i++) {
+					bot.sendMessage({
+						to: channelID,
+						message: result[i] + ' ' + keys[result[i]]['guide']
+					});
+				}
+			}
 		}
-		bot.sendMessage({
-			to: channelID,
-			message: mention(userID) + ' Guides we use:\n' + text
-		});
 	} else if (message === '!videos') {
-		var text = '';
-		for (i=0; i < VIDEOS.length; i++) {
-			text += 'Zone: ' + VIDEOS[i]['zone'] + '\nLink: ' + VIDEOS[i]['url'] + '\n'
-		}
-		bot.sendMessage({
-			to: channelID,
-			message: mention(userID) + ' Videos we watch:\n' + text
-		});
+		return;
 	} else if (message === '!ilovehunters') {
 		bot.sendMessage({
 			to: channelID,
