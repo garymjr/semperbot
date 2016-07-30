@@ -16,10 +16,9 @@ bot.on('ready', function(event) {
 bot.on('message', function(user, userID, channelID, message, event) {
 	var d = event['d'];
 	console.log({
-		'author': Object.keys(author),
-		'mentions': Object.keys(mentions),
-		'channel_id': d.channel_id,
-		'content': d.content
+		'author': d['author'].id,
+		'channel_id': d['channel_id'],
+		'content': d['content']
 	});
 	if (message === '!help') {
 		bot.sendMessage({
