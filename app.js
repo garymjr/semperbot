@@ -136,7 +136,41 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 		}
 	} else if (message[0] === '!videos') {
-		return;
+		var text = '';
+		var keys = Object.keys(GUIDES);
+		if (message.length === 1) {
+			for (i=0; i < keys.length; i++) {
+				if (GUIDES[keys[i]]['video'] !== '') {
+					text += keys[i] + ', ';
+				}
+			}
+			bot.sendMessage({
+				to: channelID,
+				message: mention(userID) + ' Videos available for ' + text
+			});
+		} else {
+			var result = [];
+			search = message[1].toLowerCase();
+			for (i=0; i < keys.length; i++) {
+				if (keys[i].indexOf(search) !== -1 && GUIDES[keys[i]][video] !== '') { 
+					result.push(keys[i]);
+				}
+			}
+
+			if (result.length >= 1) {
+				bot.sendMessage({
+					to: channelID,
+					message: mention(userID) + ' Videos found:'
+				});
+
+				for (i=0; i < result.length; i++) {
+					bot.sendMessage({
+						to: channelID,
+						message: GUIDES[result[i]]['video']
+					});
+				}
+			}
+		}
 	} else if (message[0] === '!ilovehunters') {
 		bot.sendMessage({
 			to: channelID,
