@@ -130,7 +130,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 				for (i=0; i < result.length; i++) {
 					bot.sendMessage({
 						to: channelID,
-						message: result[i] + ' ' + keys[result[i]]['guide']
+						message: result[i] + ' ' + GUIDES[result[i]]['guide']
 					});
 				}
 			}
