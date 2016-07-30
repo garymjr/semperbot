@@ -11,6 +11,7 @@ var COMMANDS = [
 
 bot.on('ready', function(event) {
 	console.log('Logged in as %s - %s\n', bot.username, bot.id);
+	console.log(bot.users.toSource())
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
