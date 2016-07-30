@@ -152,7 +152,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			var result = [];
 			search = message[1].toLowerCase();
 			for (i=0; i < keys.length; i++) {
-				if (keys[i].indexOf(search) !== -1 && GUIDES[keys[i]][video] !== '') { 
+				if (keys[i].indexOf(search) !== -1 && GUIDES[keys[i]]['video'] !== '') { 
 					result.push(keys[i]);
 				}
 			}
