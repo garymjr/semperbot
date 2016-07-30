@@ -76,7 +76,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 	} else if (message === '!next') {
 		var date, seconds, hours, minutes;
 		var today = new Date();
-		if (today.getDay() === 4 || today.getDay === 6) {
+		if (today.getDay() === 4 || today.getDay() === 6) {
 			date = new Date();
 			date.setHours(19, 0, 0);
 			seconds = (date.getTime() - today.getTime()) / 1000;
