@@ -110,7 +110,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 			bot.sendMessage({
 				to: channelID,
-				message: mention(userID) + ' Guides available for ' + test
+				message: mention(userID) + ' Guides available for ' + text
 			});
 		} else {
 			var result = [];
