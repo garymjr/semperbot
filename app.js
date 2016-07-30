@@ -135,14 +135,14 @@ bot.on('message', function(user, userID, channelID, message, event) {
 				}
 			}
 		}
-	} else if (message === '!videos') {
+	} else if (message[0] === '!videos') {
 		return;
-	} else if (message === '!ilovehunters') {
+	} else if (message[0] === '!ilovehunters') {
 		bot.sendMessage({
 			to: channelID,
 			message: mention('207175112691023872') + ' I heard you love hunters!'
 		});
-	} else if (message === '!poe') {
+	} else if (message[0] === '!poe') {
 		bot.sendMessage({
 			to: channelID,
 			message: mention('125071902556291072') + ' tap tap tap '
