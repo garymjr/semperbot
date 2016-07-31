@@ -38,17 +38,17 @@ bot.on('ready', function(event) {
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
+	var text, keys, result;
 	message = message.split(' ');
-	var d = event['d'];
+	var d = event.d;
 	console.log({
-		'author': d['author'].id,
+		'author': d.author.id,
 		'user_id': userID,
 		'channel_id': channelID,
 		'content': message
 	});
 
 	if (message[0] === '!help') {
-		var text = '';
 		for (i=0; i < COMMANDS.length; i++) {
 			text += COMMANDS[i] + ', ';
 		}
@@ -72,7 +72,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 
 			// get minutes
-			minutes = Math.floor((seconds % 3600) / 60)
+			minutes = Math.floor((seconds % 3600) / 60);
 		} else if (today.getDay() === 5) {
 			date = new Date();
 			date.setDate(date.getDate() + 1);
@@ -94,27 +94,27 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			message: mention(userID) + ' Next raid in ' + hours + ' hour(s) and ' + minutes + ' minute(s).'
 		});
 	} else if (message[0] === '!times') {
-		var text = '';
+		text = '';
 		for (i=0; i < RAID_TIMES.length; i++) {
-			text += RAID_TIMES[i]['day'] + ': ' + RAID_TIMES[i]['start'] + ' - ' + RAID_TIMES[i]['end'] + '\n';
+			text += RAID_TIMES[i].day + ': ' + RAID_TIMES[i].start + ' - ' + RAID_TIMES[i].end + '\n';
 		}
 		bot.sendMessage({
 			to: channelID,
 			message: mention(userID) + ' Current raid times are: (All times using server time)\n' + text
 		});
 	} else if (message[0] === '!guides') {
-		var text = '';
-		var keys = Object.keys(GUIDES);
+		text = '';
+		keys = Object.keys(GUIDES);
 		if (message.length === 1) {
 			for (i=0; i < keys.length; i++) {
-				text += keys[i] + ', '
+				text += keys[i] + ', ';
 			}
 			bot.sendMessage({
 				to: channelID,
 				message: mention(userID) + ' Guides available for ' + text.slice(0, -2)
 			});
 		} else {
-			var result = [];
+			result = [];
 			search = message[1].toLowerCase();
 			for (i=0; i < keys.length; i++) {
 				if (keys[i].indexOf(search) !== -1) {
@@ -126,17 +126,17 @@ bot.on('message', function(user, userID, channelID, message, event) {
 				for (i=0; i < result.length; i++) {
 					bot.sendMessage({
 						to: channelID,
-						message: GUIDES[result[i]]['guide']
+						message: GUIDES[result[i]].guide
 					});
 				}
 			}
 		}
 	} else if (message[0] === '!videos') {
-		var text = '';
-		var keys = Object.keys(GUIDES);
+		text = '';
+		keys = Object.keys(GUIDES);
 		if (message.length === 1) {
 			for (i=0; i < keys.length; i++) {
-				if (GUIDES[keys[i]]['video'] !== '') {
+				if (GUIDES[keys[i]].video !== '') {
 					text += keys[i] + ', ';
 				}
 			}
@@ -145,10 +145,10 @@ bot.on('message', function(user, userID, channelID, message, event) {
 				message: mention(userID) + ' Videos available for ' + text.slice(0, -2)
 			});
 		} else {
-			var result = [];
+			result = [];
 			search = message[1].toLowerCase();
 			for (i=0; i < keys.length; i++) {
-				if (keys[i].indexOf(search) !== -1 && GUIDES[keys[i]]['video'] !== '') { 
+				if (keys[i].indexOf(search) !== -1 && GUIDES[keys[i]].video !== '') {
 					result.push(keys[i]);
 				}
 			}
@@ -157,7 +157,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 				for (i=0; i < result.length; i++) {
 					bot.sendMessage({
 						to: channelID,
-						message: GUIDES[result[i]]['video']
+						message: GUIDES[result[i]].video
 					});
 				}
 			}
