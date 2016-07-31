@@ -1,5 +1,4 @@
 var fs = require('fs');
-var datejs = require('datejs');
 var Discord = require('discord.io');
 var bot = new Discord.Client({
 	autorun: true,
@@ -16,48 +15,22 @@ var COMMANDS = [
 ];
 
 var RAID_TIMES = [
-	// [day_number, day_name, [start_time], [end_time]]
-	[4, 'thursday', [19, 0], [21, 0]],
-	[6, 'saturday', [19, 0], [21, 0]]
+	{
+		'day': 'Thursday',
+		'start': '10PM',
+		'end': '12AM'
+	},
+	{
+		'day': 'Saturday',
+		'start': '10PM',
+		'end': '12AM'
+	}
 ];
 
 var GUIDES = JSON.parse(fs.readFileSync('guides.json', 'utf8'));
 
-var get_next = {
-	sunday: function() {
-		return Date.today().next().sunday();
-	},
-	monday: function() {
-		return Date.today().next().monday();
-	},
-	tuesday: function() {
-		return Date.today().next().tuesday();
-	},
-	wednesday: function() {
-		return Date.today().next().wednesday();
-	},
-	thursday: function() {
-		return Date.today().next().thursday();
-	},
-	friday: function() {
-		return Date.today().next().friday();
-	},
-	saturday: function() {
-		return Date.today().next().saturday();
-	}
-};
-
 function mention(user_id) {
 	return '<@!' + user_id + '>';
-}
-
-function get_time(arr) {
-	var today, date;
-	today = Date.today();
-	if (today.getDay() !== arr[0]) {
-		date = get_next[arr[1]]();
-	}
-	return [date.setHours(arr[2][0], arr[2][1]), date.setHours(arr[3][0], arr[3][1])];
 }
 
 bot.on('ready', function(event) {
@@ -65,7 +38,7 @@ bot.on('ready', function(event) {
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
-	var text, keys, result, date, today;
+	var text, keys, result;
 	message = message.split(' ');
 	var d = event.d;
 	console.log({
@@ -84,18 +57,38 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			message: mention(userID) + ' Available commands: ' + text.slice(0, -2)
 		});
 	} else if (message[0] === '!next') {
-		today = Date.today();
-		for (i=0; i < RAID_TIMES.length; i++) {
-			date = new Date(get_time(RAID_TIMES[i])[0]);
-			if (today.getDay() === date.getDay() && today.getTime() < date.getTime()) {
-				break;
-			} else if (today.getDay() < date.getDay()) {
-				break;
+		var date, seconds, hours, minutes;
+		var today = new Date();
+		if (today.getDay() === 4 || today.getDay() === 6) {
+			date = new Date();
+			date.setHours(19, 0, 0);
+			seconds = (date.getTime() - today.getTime()) / 1000;
+
+			// get hours
+			if (seconds >= 3600) {
+				hours = Math.floor(seconds / 3600);
+			} else {
+				hours = 0;
 			}
+
+			// get minutes
+			minutes = Math.floor((seconds % 3600) / 60);
+		} else if (today.getDay() === 5) {
+			date = new Date();
+			date.setDate(date.getDate() + 1);
+			date.setHours(19, 0, 0);
+			seconds = (date.getTime() - today.getTime()) / 1000;
+			hours = Math.floor(seconds / 3600);
+			minutes = Math.floor((seconds % 3600) / 60);
+		} else if (today.getDate() < 4) {
+			var offset = 4 - today.getDay();
+			date = new Date();
+			date.setDate(date.getDate() + offset);
+			date.setHours(19, 0, 0);
+			seconds = (date.getTime() - today.getTime()) / 1000;
+			hours = Math.floor(seconds / 3600);
+			minutes = Math.floor((seconds % 3600) / 60);
 		}
-		seconds = (today.getTime() - date.getTime()) / 1000;
-		hours = seconds / 3600;
-		minutes = (seconds % 3600) / 60;
 		bot.sendMessage({
 			to: channelID,
 			message: mention(userID) + ' Next raid in ' + hours + ' hour(s) and ' + minutes + ' minute(s).'
@@ -103,10 +96,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 	} else if (message[0] === '!times') {
 		text = '';
 		for (i=0; i < RAID_TIMES.length; i++) {
-			times = get_time(RAID_TIMES[i]);
-			start = new Date(times[0]);
-			end = new Date(times[1]);
-			text += RAID_TIMES[i][1].charAt(0).toUpperCase() + RAID_TIMES[i][1].slice(1) + ': ' + start.getHours() + ':' + start.getMinutes() + ' - ' + end.getHours() + ':' + end.getMinutes() + '\n';
+			text += RAID_TIMES[i].day + ': ' + RAID_TIMES[i].start + ' - ' + RAID_TIMES[i].end + '\n';
 		}
 		bot.sendMessage({
 			to: channelID,

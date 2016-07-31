@@ -4,8 +4,7 @@
   "description": "Simple discord bot for semper para bellum",
   "main": "app.js",
   "dependencies": {
-    "discord.io": "^1.13.4",
-    "datejs": "~1.0.0-rc3"
+    "discord.io": "^1.13.4"
   },
   "devDependencies": {},
   "scripts": {
