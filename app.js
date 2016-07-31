@@ -54,7 +54,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		}
 		bot.sendMessage({
 			to: channelID,
-			message: mention(userID) + ' Available commands: ' + text
+			message: mention(userID) + ' Available commands: ' + text.slice(0, -2)
 		});
 	} else if (message[0] === '!next') {
 		var date, seconds, hours, minutes;
@@ -111,7 +111,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 			bot.sendMessage({
 				to: channelID,
-				message: mention(userID) + ' Guides available for ' + text
+				message: mention(userID) + ' Guides available for ' + text.slice(0, -2)
 			});
 		} else {
 			var result = [];
@@ -123,15 +123,10 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 
 			if (result.length >= 1) {
-				bot.sendMessage({
-					to: channelID,
-					message: mention(userID) + ' Guides found:'
-				});
-
 				for (i=0; i < result.length; i++) {
 					bot.sendMessage({
 						to: channelID,
-						message: result[i] + ' ' + GUIDES[result[i]]['guide']
+						message: GUIDES[result[i]]['guide']
 					});
 				}
 			}
@@ -147,7 +142,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 			bot.sendMessage({
 				to: channelID,
-				message: mention(userID) + ' Videos available for ' + text
+				message: mention(userID) + ' Videos available for ' + text.slice(0, -2)
 			});
 		} else {
 			var result = [];
@@ -159,11 +154,6 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			}
 
 			if (result.length >= 1) {
-				bot.sendMessage({
-					to: channelID,
-					message: mention(userID) + ' Videos found:'
-				});
-
 				for (i=0; i < result.length; i++) {
 					bot.sendMessage({
 						to: channelID,
@@ -185,7 +175,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 	} else if (message[0] === '!poe') {
 		bot.sendMessage({
 			to: channelID,
-			message: mention('125071902556291072') + ' tap tap tap '
+			message: mention('125071902556291072') + ' tap tap tap'
 		});
 	}
 });
