@@ -10,7 +10,8 @@ var COMMANDS = [
 	'!next',
 	'!times',
 	'!guides',
-	'!videos'
+	'!videos',
+	'!code'
 ];
 
 var RAID_TIMES = [
@@ -90,7 +91,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		}
 		bot.sendMessage({
 			to: channelID,
-			message: mention(userID) + ' Next raid in ' + hours + ' hours and ' + minutes + ' minutes.'
+			message: mention(userID) + ' Next raid in ' + hours + ' hour(s) and ' + minutes + ' minute(s).'
 		});
 	} else if (message[0] === '!times') {
 		var text = '';
@@ -171,6 +172,11 @@ bot.on('message', function(user, userID, channelID, message, event) {
 				}
 			}
 		}
+	} else if (message[0] === '!code') {
+		bot.sendMessage({
+			to: channelID,
+			message: mention(userID) + ' https://github.com/garymjr/semperbot'
+		});
 	} else if (message[0] === '!ilovehunters') {
 		bot.sendMessage({
 			to: channelID,
