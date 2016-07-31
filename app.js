@@ -55,7 +55,7 @@ function get_time(arr) {
 	var today, date;
 	today = Date.today();
 	if (today.getDay() !== arr[0]) {
-		date = get_next[arr[1]];
+		date = get_next[arr[1]]();
 	}
 	return [date.setHours(arr[2][0], arr[2][1]), date.setHours(arr[3][0], arr[3][1])];
 }
