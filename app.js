@@ -57,41 +57,36 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			message: mention(userID) + ' Available commands: ' + text.slice(0, -2)
 		});
 	} else if (message[0] === '!next') {
-		var date, seconds, hours, minutes;
+		var date, seconds, days, hours, minutes;
 		var today = new Date();
 		if (today.getDay() === 4 || today.getDay() === 6) {
 			date = new Date();
 			date.setHours(19, 0, 0);
 			seconds = (date.getTime() - today.getTime()) / 1000;
-
-			// get hours
-			if (seconds >= 3600) {
-				hours = Math.floor(seconds / 3600);
-			} else {
-				hours = 0;
-			}
-
-			// get minutes
-			minutes = Math.floor((seconds % 3600) / 60);
+			days = Math.floor(seconds / 86400);
+			hours = Math.floor((seconds % 86400) / 3600);
+			minutes = Math.floor(((seconds % 86400) % 3600) / 60);
 		} else if (today.getDay() === 5) {
 			date = new Date();
 			date.setDate(date.getDate() + 1);
 			date.setHours(19, 0, 0);
 			seconds = (date.getTime() - today.getTime()) / 1000;
-			hours = Math.floor(seconds / 3600);
-			minutes = Math.floor((seconds % 3600) / 60);
+			days = Math.floor(seconds / 86400);
+			hours = Math.floor((seconds % 86400) / 3600);
+			minutes = Math.floor(((seconds % 86400) % 3600) / 60);
 		} else if (today.getDay() < 4) {
 			var offset = 4 - today.getDay();
 			date = new Date();
 			date.setDate(date.getDate() + offset);
 			date.setHours(19, 0, 0);
 			seconds = (date.getTime() - today.getTime()) / 1000;
-			hours = Math.floor(seconds / 3600);
-			minutes = Math.floor((seconds % 3600) / 60);
+			days = Math.floor(seconds / 86400);
+			hours = Math.floor((seconds % 86400) / 3600);
+			minutes = Math.floor(((seconds % 86400) % 3600) / 60);
 		}
 		bot.sendMessage({
 			to: channelID,
-			message: mention(userID) + ' Next raid in ' + hours + ' hour(s) and ' + minutes + ' minute(s).'
+			message: mention(userID) + ' Next raid in ' + days + ' day(s) ' + hours + ' hour(s) and ' + minutes + ' minute(s).'
 		});
 	} else if (message[0] === '!times') {
 		text = '';
