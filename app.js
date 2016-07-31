@@ -80,7 +80,7 @@ bot.on('message', function(user, userID, channelID, message, event) {
 			seconds = (date.getTime() - today.getTime()) / 1000;
 			hours = Math.floor(seconds / 3600);
 			minutes = Math.floor((seconds % 3600) / 60);
-		} else if (today.getDate() < 4) {
+		} else if (today.getDay() < 4) {
 			var offset = 4 - today.getDay();
 			date = new Date();
 			date.setDate(date.getDate() + offset);
