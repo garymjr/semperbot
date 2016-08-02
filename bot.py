@@ -33,21 +33,19 @@ GUIDES = 'guides.json'
 client = discord.Client()
 
 @client.event
-@asyncio.coroutine
-def on_ready():
+async def on_ready():
     print('Logged in as:', client.user.name, '-',  client.user.id)
     print('-----')
 
 @client.event
-@asyncio.coroutine
-def on_message(message):
+async def on_message(message):
     content = message.content.split()
     print([message.author.id, message.channel.id, content])
     if content[0] == '!help':
         reply = ''
         for c in COMMANDS:
             reply += c + ', '
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             mention_user(message.author.id) + ' Available commands: ' + reply[:-2])
     elif content[0] == '!next':
@@ -72,7 +70,7 @@ def on_message(message):
         hours = math.floor((time.total_seconds() % 86400) / 3600)
         minutes = math.floor(((time.total_seconds() % 86400) % 3600) / 60)
         reply = str(days) + ' day(s), ' + str(hours) + ' hour(s), ' + str(minutes) + ' minute(s)'
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             mention_user(message.author.id) + ' The next raid is in ' + reply)
     elif content[0] == '!times':
@@ -82,7 +80,7 @@ def on_message(message):
             reply += DAYS[raid[0]] + ' ' + date.strftime('%-I:%M%p - ')
             date = datetime.time(raid[2][0], raid[2][1])
             reply += date.strftime('%-I:%M%p (MST)') + '\n'
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             'Current raid times:\n' + reply)
     elif content[0] == '!guides':
@@ -100,9 +98,9 @@ def on_message(message):
             for guide in guides:
                 print([content[1], guide])
                 if content[1].lower() in guide:
-                    yield from client.send_message(message.channel, keys[guide]['guide'])
+                    await client.send_message(message.channel, keys[guide]['guide'])
         else:
-            yield from client.send_message(
+            await client.send_message(
                 message.channel,
                 mention_user(message.author.id) + ' Available guides: ' + reply[:-2])
     elif content[0] == '!videos':
@@ -119,27 +117,27 @@ def on_message(message):
         if len(content) > 1:
             for video in videos:
                 if content[1].lower() in video:
-                    yield from client.send_message(message.channel, keys[video]['video'])
+                    await client.send_message(message.channel, keys[video]['video'])
         else:
-            yield from client.send_message(
+            await client.send_message(
                 message.channel,
                 mention_user(message.author.id) + ' Available videos: ' + reply[:-2])
     elif content[0] == '!logs':
         logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key=***REMOVED***").read().decode('utf-8')
         logs = json.loads(logs)
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             mention_user(message.author.id) + ' https://www.warcraftlogs.com/reports/' + logs[-1]['id'])
     elif content[0] == '!code':
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             mention_user(message.author.id) + ' https://github.com/garymjr/semperbot')
     elif content[0] == '!poe':
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             mention_user('125071902556291072') + ' tap tap tap')
     elif content[0] == '!hunters':
-        yield from client.send_message(
+        await client.send_message(
             message.channel,
             mention_user('207175112691023872') + ' I heard you love hunters!')
 
