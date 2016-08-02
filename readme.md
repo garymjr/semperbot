@@ -1,10 +1,10 @@
 # Simple discord bot for Semper Para Bellum
 ## An alliance guild on Dalaran-US
 
-Requires nodejs and discord.io
+Requires python3, [discord.py](https://github.com/Rapptz/discord.py) and asyncio.
 
 To run type
 ```
-npm install
-node app.js
+python3 -m pip install -U discord.py
+python3 bot.py
 ```
