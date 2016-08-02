@@ -76,7 +76,7 @@ async def on_message(message):
                 message.channel,
                 '{} Available {}: {}'.format(mention_user(message.author.id), content[0][1:], ', '.join(keys)))
     elif content[0] == '!logs':
-        logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key=***REMOVED***").read().decode('utf-8')
+        logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key={}".format(os.environ['WLOGS_API'])).read().decode('utf-8')
         logs = json.loads(logs)
         await client.send_message(
             message.channel,
