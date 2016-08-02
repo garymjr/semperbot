@@ -2,6 +2,7 @@ import datetime
 import json
 import math
 import urllib.request
+import os
 
 import discord
 import asyncio
@@ -141,4 +142,4 @@ class SemperBot(discord.Client):
                 mention_user('207175112691023872') + ' I heard you love hunters!')
 
 client = SemperBot()
-client.run('MjA4NjExMjgwMDY2NDQ1MzEy.Cn0_Kg.l2V5xWp764ZPTKwP7ggx-eq91Fw')
+client.run(os.environ['DISCORD_API'])
