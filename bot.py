@@ -40,7 +40,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
     content = message.content.split()
-    print([message.author.id, message.channel.id, content])
+    if content[0] in COMMANDS:
+        print([message.author.id, message.channel.id, content[0]])
     reply = ''
     if content[0] == '!help':
         await client.send_message(
