@@ -3,6 +3,7 @@ import json
 import math
 import urllib.request
 import os
+import ast
 
 import discord
 import asyncio
@@ -19,6 +20,7 @@ COMMANDS = [
     '!guides',
     '!videos',
     '!logs',
+    '!wiki'
     '!code',
 ]
 
@@ -79,6 +81,18 @@ async def on_message(message):
         await client.send_message(
             message.channel,
             mention_user(message.author.id) + ' https://www.warcraftlogs.com/reports/' + logs[-1]['id'])
+    elif content[0] == '!wiki':
+        if len(content) > 1:
+            results = urllib.request.urlopen("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + '%20'.join(content[1:])).read().decode('utf-8')
+            results = ast.literal_eval(results)
+            if len(results[3]) > 0:
+                await client.send_message(
+                    message.channel,
+                    mention_user(message.author.id) + ' ' + results[3][0])
+            else:
+                await client.send_message(
+                    message.channel,
+                    mention_user(message.author.id) + " I wasn't able to find any results")
     elif content[0] == '!code':
         await client.send_message(
             message.channel,
