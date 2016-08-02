@@ -94,7 +94,7 @@ async def on_message(message):
     elif content[0] == '!tacos':
         await client.send_message(
             message.channel,
-            mention_user(message.author.id) + 'https://www.google.com/maps/search/tacos/')
+            mention_user(message.author.id) + ' https://www.google.com/maps/search/tacos/')
 
 def next_raid_string(now, next):
     next_raid = relativedelta(next, now)
