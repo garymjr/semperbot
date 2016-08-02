@@ -1,6 +1,7 @@
 import datetime
 import json
 import math
+import urllib.request
 
 import discord
 import asyncio
@@ -14,6 +15,7 @@ COMMANDS = [
     '!times',
     '!guides',
     '!videos',
+    '!logs',
     '!code',
 ]
 
@@ -119,6 +121,12 @@ class SemperBot(discord.Client):
                 yield from self.send_message(
                     message.channel,
                     mention_user(message.author.id) + ' Available videos: ' + reply[:-2])
+        elif content[0] == '!logs':
+            logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key=187bb410079c32b61d412a8838fb7542").read().decode('utf-8')
+            logs = json.loads(logs)
+            yield from self.send_message(
+                message.channel,
+                mention_user(message.author.id) + ' https://www.warcraftlogs.com/reports/' + logs[-1]['id'])
         elif content[0] == '!code':
             yield from self.send_message(
                 message.channel,
