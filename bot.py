@@ -47,7 +47,7 @@ async def on_message(message):
     elif content[0] == '!next':
         today = datetime.datetime.now() - datetime.timedelta(hours=7)
         next_raid = find_next_raid(today)
-        reply = next_raid_string(today, raids[0])
+        reply = next_raid_string(today, next_raid)
         await client.send_message(
             message.channel,
             mention_user(message.author.id) + ' The next raid is in ' + reply)
