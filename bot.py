@@ -84,7 +84,7 @@ async def on_message(message):
             '{} https://www.warcraftlogs.com/reports/{}'.format(mention_user(message.author.id), logs[-1]['id']))
     elif content[0] == '!wiki':
         if len(content) > 1:
-            results = urllib.request.urlopen("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + '%20'.join(content[1:])).read().decode('utf-8')
+            results = urllib.request.urlopen("http://wow.gamepedia.com/api.php?action=opensearch&search=" + '%20'.join(content[1:])).read().decode('utf-8')
             results = ast.literal_eval(results)
             if len(results[3]) > 0:
                 await client.send_message(
