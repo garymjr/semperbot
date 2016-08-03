@@ -3,6 +3,7 @@ import json
 import math
 import urllib.request
 import os
+import ast
 
 import discord
 import asyncio
@@ -19,6 +20,7 @@ COMMANDS = [
     '!guides',
     '!videos',
     '!logs',
+    '!wiki'
     '!code',
 ]
 
@@ -32,25 +34,26 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('Logged in as:', client.user.name, '-',  client.user.id)
+    print('Logged in as: {} - {}'.format(client.user.name, client.user.id))
     print('-----')
 
 @client.event
 async def on_message(message):
     content = message.content.split()
-    print([message.author.id, message.channel.id, content])
+    if content[0] in COMMANDS:
+        print([message.author.id, message.channel.id, content[0]])
     reply = ''
     if content[0] == '!help':
         await client.send_message(
             message.channel,
-            mention_user(message.author.id) + ' Available commands: ' + ', '.join(COMMANDS))
+            '{} Available commands: {}'.format(mention_user(message.author.id), ', '.join(COMMANDS)))
     elif content[0] == '!next':
         today = datetime.datetime.now() - datetime.timedelta(hours=7)
         next_raid = find_next_raid(today)
-        reply = next_raid_string(today, raids[0])
+        reply = next_raid_string(today, next_raid)
         await client.send_message(
             message.channel,
-            mention_user(message.author.id) + ' The next raid is in ' + reply)
+            '{} The next raid is in {}'.format(mention_user(message.author.id), reply))
     elif content[0] == '!times':
         for raid in TIMES:
             date = datetime.time(raid[1][0], raid[1][1])
@@ -72,25 +75,41 @@ async def on_message(message):
         else:
             await client.send_message(
                 message.channel,
-                mention_user(message.author.id) + ' Available ' + content[0][1:] + ': ' + ', '.join(keys))
+                '{} Available {}: {}'.format(mention_user(message.author.id), content[0][1:], ', '.join(keys)))
     elif content[0] == '!logs':
-        logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key=***REMOVED***").read().decode('utf-8')
+        logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key={}".format(os.environ['WLOGS_API'])).read().decode('utf-8')
         logs = json.loads(logs)
         await client.send_message(
             message.channel,
-            mention_user(message.author.id) + ' https://www.warcraftlogs.com/reports/' + logs[-1]['id'])
+            '{} https://www.warcraftlogs.com/reports/{}'.format(mention_user(message.author.id), logs[-1]['id']))
+    elif content[0] == '!wiki':
+        if len(content) > 1:
+            results = urllib.request.urlopen("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + '%20'.join(content[1:])).read().decode('utf-8')
+            results = ast.literal_eval(results)
+            if len(results[3]) > 0:
+                await client.send_message(
+                    message.channel,
+                    '{} {}'.format(mention_user(message.author.id), results[3][0]))
+            else:
+                await client.send_message(
+                    message.channel,
+                    "{} I wasn't able to find any results".format(mention_user(message.author.id)))
     elif content[0] == '!code':
         await client.send_message(
             message.channel,
-            mention_user(message.author.id) + ' https://github.com/garymjr/semperbot')
+            '{} https://github.com/garymjr/semperbot'.format(mention_user(message.author.id)))
     elif content[0] == '!poe':
         await client.send_message(
             message.channel,
-            mention_user('125071902556291072') + ' tap tap tap')
+            '{} tap tap tap'.format(mention_user('125071902556291072')))
     elif content[0] == '!hunters':
         await client.send_message(
             message.channel,
-            mention_user('207175112691023872') + ' I heard you love hunters!')
+            '{} I heard you love hunters!'.format(mention_user('207175112691023872')))
+    elif content[0] == '!tacos':
+        await client.send_message(
+            message.channel,
+            '{} https://www.google.com/maps/search/tacos/'.format(mention_user(message.author.id)))
 
 def next_raid_string(now, next):
     next_raid = relativedelta(next, now)
