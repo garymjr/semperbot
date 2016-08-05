@@ -100,7 +100,6 @@ async def on_message(message):
         if len(content) > 1:
             # try:
             results = urllib.request.urlopen('https://us.api.battle.net/wow/character/Dalaran/{}?fields=items&locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
-            results = json.loads(results)
             results = ast.literal_eval(results)
             ilvl = results['items']['averageItemLevel']
             reply = '{} Character with name {} has an item level of {}'.format(mention_user(message.author.id), content[1], ilvl)
