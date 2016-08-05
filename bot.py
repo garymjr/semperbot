@@ -104,7 +104,7 @@ async def on_message(message):
                 results = ast.literal_eval(results)
                 ilvl = results['items']['averageItemLevel']
                 reply = '{} Character with name {} has an item level of {}'.format(mention_user(message.author.id), content[1], ilvl)
-            except urllib.error.HTTPError, e:
+            except urllib.error.HTTPError:
                 reply = '{} I was unable to find that character on Dalaran'.format(mention_user(message.author.id))
             await client.send_message(message.channel, reply)
     elif content[0] == '!code':
