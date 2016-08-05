@@ -20,7 +20,8 @@ COMMANDS = [
     '!guides',
     '!videos',
     '!logs',
-    '!wiki'
+    '!wiki',
+    'ilvl',
     '!code',
 ]
 
@@ -95,6 +96,17 @@ async def on_message(message):
                 await client.send_message(
                     message.channel,
                     "{} I wasn't able to find any results".format(mention_user(message.author.id)))
+    elif content[0] == '!ilvl':
+        if len(content) > 1:
+            try:
+                results = urllib.request.url('https://us.api.battle.net/wow/character/Dalaran/{}/?fields=items&locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
+                results = json.loads(results.read().decode('utf-8'))
+                results = ast.literal_eval(results)
+                ilvl = results['items']['averageItemLevel']
+                reply = '{} Character with name {} has an item level of {}'.format(mention_user(message.author.id), content[1], ilvl)
+            except urllib.error.HTTPError, e:
+                reply = '{} I was unable to find that character on Dalaran'.format(mention_user(message.author.id))
+            await client.send_message(message.channel, reply)
     elif content[0] == '!code':
         await client.send_message(
             message.channel,
