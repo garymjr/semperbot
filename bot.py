@@ -99,7 +99,7 @@ async def on_message(message):
     elif content[0] == '!ilvl':
         if len(content) > 1:
             try:
-                results = urllib.request.url('https://us.api.battle.net/wow/character/Dalaran/{}/?fields=items&locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
+                results = urllib.request.urlopen('https://us.api.battle.net/wow/character/Dalaran/{}/?fields=items&locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API']))
                 results = json.loads(results.read().decode('utf-8'))
                 results = ast.literal_eval(results)
                 ilvl = results['items']['averageItemLevel']
