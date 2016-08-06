@@ -43,7 +43,7 @@ async def on_ready():
 async def on_message(message):
     content = message.content.split()
     if content[0] in COMMANDS:
-        print([message.author.id, message.channel.id, content[0]])
+        print([message.author.id, message.channel.id, content])
     reply = ''
     if content[0] == '!help':
         await client.send_message(
@@ -85,11 +85,11 @@ async def on_message(message):
         if len(content) > 1:
             for key in channels:
                 if content[1].lower() in key.lower():
-                    await client.send_message(message.channel, channel[key])
+                    await client.send_message(message.channel, channels[key])
         else:
             await client.send_message(
                 message.channel,
-                '{} Available {}: {}'.format(mention_user(message.author.id), content[0][1:], ', '.join(channels)))
+                '{} Known class discord channels: {}'.format(mention_user(message.author.id), ', '.join(channels)))
     elif content[0] == '!logs':
         logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key={}".format(os.environ['WLOGS_API'])).read().decode('utf-8')
         logs = json.loads(logs)
