@@ -83,9 +83,9 @@ async def on_message(message):
         channels = json.load(file)
         file.close()
         if len(content) > 1:
-            for key, value in channels:
+            for key in channels:
                 if content[1].lower() in key:
-                    await client.send_message(message.channel, value)
+                    await client.send_message(message.channel, channel[key])
         else:
             await client.send_message(
                 message.channel,
