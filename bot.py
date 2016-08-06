@@ -76,6 +76,19 @@ async def on_message(message):
             await client.send_message(
                 message.channel,
                 '{} Available {}: {}'.format(mention_user(message.author.id), content[0][1:], ', '.join(keys)))
+    elif content[0] == ['!discord']:
+        user_request = content[0][1:-1]
+        file = open('channels.json')
+        channels = json.load(file)
+        file.close()
+        if len(content) > 1:
+            for key, value in channels:
+                if content[1].lower() in key:
+                    await client.send_message(message.channel, value)
+        else:
+            await client.send_message(
+                message.channel,
+                '{} Available {}: {}'.format(mention_user(message.author.id), content[0][1:], ', '.join(channels)))
     elif content[0] == '!logs':
         logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key={}".format(os.environ['WLOGS_API'])).read().decode('utf-8')
         logs = json.loads(logs)
