@@ -23,6 +23,7 @@ COMMANDS = [
     '!wiki',
     'ilvl',
     '!code',
+    '!discord',
 ]
 
 TIMES = [
