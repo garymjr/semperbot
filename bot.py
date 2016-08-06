@@ -78,7 +78,6 @@ async def on_message(message):
                 message.channel,
                 '{} Available {}: {}'.format(mention_user(message.author.id), content[0][1:], ', '.join(keys)))
     elif content[0] == ['!discord']:
-        user_request = content[0][1:-1]
         file = open('channels.json')
         channels = json.load(file)
         file.close()
