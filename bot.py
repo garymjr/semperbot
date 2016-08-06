@@ -84,7 +84,7 @@ async def on_message(message):
         file.close()
         if len(content) > 1:
             for key in channels:
-                if content[1].lower() in key:
+                if content[1].lower() in key.lower():
                     await client.send_message(message.channel, channel[key])
         else:
             await client.send_message(
