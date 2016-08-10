@@ -24,6 +24,7 @@ COMMANDS = [
     'ilvl',
     '!code',
     '!discord',
+    '!last',
 ]
 
 TIMES = [
@@ -123,6 +124,17 @@ async def on_message(message):
         await client.send_message(
             message.channel,
             '{} https://github.com/garymjr/semperbot'.format(mention_user(message.author.id)))
+    elif content[0] == '!last':
+        if len(content) > 1:
+            try:
+                results = urllib.request.urlopen('https://us.api.battle.net/wow/character/Dalaran/{}?locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
+                results = ast.literal_eval(results)
+                timestamp = results['lastModified']
+                last_seen = datetime.datetime.fromtimestap(int(timestamp) / 1e3) - datetime.timedelta(hours=7)
+                reply = '{} {} was last seen on {}'.format(mention_user(message.author.id), content[1], last_seen.strftime('%B %-d at %-I:%M%p (MST)'))
+                await client.send_message(message.channel, reply)
+            except urllib.error.HTTPError:
+                pass
     elif content[0] == '!poe':
         await client.send_message(
             message.channel,
