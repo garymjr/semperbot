@@ -14,17 +14,17 @@ def mention_user(user_id):
     return '<@!' + user_id + '>'
 
 COMMANDS = [
-    '!help',
-    '!next',
-    '!times',
-    '!guides',
-    '!videos',
-    '!logs',
-    '!wiki',
-    'ilvl',
-    '!code',
-    '!discord',
-    '!last',
+    ['!help', 'Displays help menu'],
+    ['!next', 'Displays the time until next raid'],
+    ['!times', 'Displays all raid times'],
+    ['!guides', 'Displays all available guides. Use !guides <guide> for specific guide'],
+    ['!videos', 'Displays all available videos. Use !videos <video> for specific video'],
+    ['!logs', 'Displays latest warcraftlogs link'],
+    ['!wiki', 'Searches wowpedia and returns results'],
+    ['!ilvl', 'Displays ilvl of requested character (Dalaran Only)'],
+    ['!discord', 'Displays invite to class specific discord channels'],
+    ['!last', 'Displays the time a character was last logged in'],
+    ['!code', 'Displays github page for bot'],
 ]
 
 TIMES = [
@@ -43,13 +43,20 @@ async def on_ready():
 @client.event
 async def on_message(message):
     content = message.content.split()
-    if content[0] in COMMANDS:
-        print([message.author.id, message.channel.id, content])
+    keys = [cmd[0] for cmd in COMMANDS]
+    if content[0] in keys:
+        await client.send_message(client.get_channel('208612645106876416'), '{} used the command: `{}`'.format(message.author.name, message.content))
     reply = ''
     if content[0] == '!help':
-        await client.send_message(
-            message.channel,
-            '{} Available commands: {}'.format(mention_user(message.author.id), ', '.join(COMMANDS)))
+        max_len = 0
+        for cmd in COMMANDS:
+            if len(cmd[0]) > max_len:
+                max_len = len(cmd[0])
+        menu = '```Command Menu:\n'
+        for cmd in COMMANDS:
+            menu += '\t{}{}| {}\n'.format(cmd[0], ' ' * ((max_len - len(cmd[0])) + 1), cmd[1])
+        menu += '```'
+        await client.send_message(message.channel, menu)
     elif content[0] == '!next':
         today = datetime.datetime.now() - datetime.timedelta(hours=7)
         next_raid = find_next_raid(today)
@@ -112,29 +119,31 @@ async def on_message(message):
                     "{} I wasn't able to find any results".format(mention_user(message.author.id)))
     elif content[0] == '!ilvl':
         if len(content) > 1:
-            try:
-                results = urllib.request.urlopen('https://us.api.battle.net/wow/character/Dalaran/{}?fields=items&locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
-                results = ast.literal_eval(results)
+            results = bnet_api_call({
+                'endpoint': 'character',
+                'params': ['Dalaran', content[1]],
+                'fields': ['items'],
+            })
+            if results != None:
                 ilvl = results['items']['averageItemLevel']
                 reply = '{} Character with name {} has an item level of {}'.format(mention_user(message.author.id), content[1], ilvl)
                 await client.send_message(message.channel, reply)
-            except urllib.error.HTTPError:
-                pass
     elif content[0] == '!code':
         await client.send_message(
             message.channel,
             '{} https://github.com/garymjr/semperbot'.format(mention_user(message.author.id)))
     elif content[0] == '!last':
         if len(content) > 1:
-            try:
-                results = urllib.request.urlopen('https://us.api.battle.net/wow/character/Dalaran/{}?locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
-                results = ast.literal_eval(results)
+            results = bnet_api_call({
+                'endpoint': 'character',
+                'params': ['Dalaran', content[1]],
+                'fields': [],
+                })
+            if results != None:
                 timestamp = results['lastModified']
                 last_seen = datetime.datetime.fromtimestamp(int(timestamp) / 1e3) - datetime.timedelta(hours=7)
                 reply = '{} {} was last seen on {}'.format(mention_user(message.author.id), content[1], last_seen.strftime('%B %-d at %-I:%M%p (MST)'))
                 await client.send_message(message.channel, reply)
-            except urllib.error.HTTPError:
-                pass
     elif content[0] == '!poe':
         await client.send_message(
             message.channel,
@@ -168,5 +177,14 @@ def find_next_raid(today):
         raids.append(next_raid)
     raids.sort()
     return(raids[0])
+
+def bnet_api_call(data):
+    endpoint_url = 'https://us.api.battle.net/wow/{}/{}?fields={}&locale=en_US&apikey={}'.format(data['endpoint'], '/'.join(data['params']), ',+'.join(data['fields']), os.environ['BATTLENET_API'])
+    try:
+        results = urllib.request.urlopen(endpoint_url).read().decode('utf-8')
+        results = ast.literal_eval(results)
+    except urllib.error.HTTPError:
+        results = None
+    return results
 
 client.run(os.environ['DISCORD_API'])
