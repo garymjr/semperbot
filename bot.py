@@ -130,7 +130,7 @@ async def on_message(message):
                 results = urllib.request.urlopen('https://us.api.battle.net/wow/character/Dalaran/{}?locale=en_US&apikey={}'.format(content[1], os.environ['BATTLENET_API'])).read().decode('utf-8')
                 results = ast.literal_eval(results)
                 timestamp = results['lastModified']
-                last_seen = datetime.datetime.fromtimestap(int(timestamp) / 1e3) - datetime.timedelta(hours=7)
+                last_seen = datetime.datetime.fromtimestamp(int(timestamp) / 1e3) - datetime.timedelta(hours=7)
                 reply = '{} {} was last seen on {}'.format(mention_user(message.author.id), content[1], last_seen.strftime('%B %-d at %-I:%M%p (MST)'))
                 await client.send_message(message.channel, reply)
             except urllib.error.HTTPError:
