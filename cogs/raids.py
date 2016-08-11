@@ -3,6 +3,8 @@ from dateutil.relativedelta import relativedelta
 
 import discord
 import datetime
+import json
+import urllib.request
 
 class Raids:
 	def __init__(self, bot):
@@ -12,7 +14,6 @@ class Raids:
 			[3, [19, 0], [21, 0]],
 			[5, [19, 0], [21, 0]],
 		]
-
 		self.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 	def find_next_raid(self, today):
@@ -52,6 +53,49 @@ class Raids:
 		next_raid = relativedelta(next_raid, today)
 		next_raid_str = '{} day(s), {} hour(s), {} mintue(s)'.format(str(next_raid.days), str(next_raid.hours), str(next_raid.minutes))
 		await self.bot.say('<@!{}> The next raid is in {}'.format(ctx.message.author.id, next_raid_str))
+
+	@commands.command(pass_context=True)
+	async def guides(self, ctx):
+		''' Displays a list of available guides. Use !guides <search> for link to guide '''
+		content = ctx.message.content
+		author = ctx.message.author
+		with open('guides.json') as f:
+			guides = json.load(f)
+			if len(content.split()) > 1:
+				query = content.split()[1]
+				match = None
+				for key in guides.keys():
+					if query in key and match == None:
+						match = key
+				await self.bot.say(guides[key]['guide'])
+			else:
+				await self.bot.say('<@!{}> Availavle guides: {}'.format(author.id, ', '.join(guides.keys())))
+
+	@commands.command(pass_context=True)
+	async def videos(self, ctx):
+		''' Displays a list of available video guides. Use !videos <search> for link to video '''
+		content = ctx.message.content
+		author = ctx.message.author
+		with open('guides.json') as f:
+			guides = json.load(f)
+			if len(content.split()) > 1:
+				query = content.split()[1]
+				match = None
+				for key in guides.keys():
+					if query in key and match == None:
+						match = key
+				await self.bot.say(guides[key]['video'])
+			else:
+				await self.bot.say('<@!{}> Availavle video guides: {}'.format(author.id, ', '.join(guides.keys())))
+
+	@commands.command(pass_context=True)
+	async def logs(self, ctx):
+		''' Displays link to latest log recorded to warcraftlogs.com '''
+		content = ctx.message.content
+		author = ctx.message.author
+		logs = urllib.request.urlopen("https://www.warcraftlogs.com:443/v1/reports/user/garymjr?api_key={}".format(os.environ['WLOGS_API']))
+		logs = json.loads(logs.read().decode('utf-8'))
+		await self.bot.say('https://www.warcraftlogs.com/reports/{}'.format(logs[-1]['id']))
 
 def setup(bot):
 	bot.add_cog(Raids(bot))
