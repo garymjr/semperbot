@@ -1,11 +1,8 @@
 from discord.ext import commands
-from dateutil.relativedelta import relativedelta
 from collections import Counter
 
 import discord
-import datetime
 import asyncio
-import copy
 import os
 
 initial_extensions = [
