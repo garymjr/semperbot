@@ -7,6 +7,9 @@ import os
 
 initial_extensions = [
 	'cogs.raids',
+	'cogs.misc',
+	'cogs.armory',
+	'cogs.fun',
 ]
 
 prefix = ['!']
