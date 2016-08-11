@@ -5,6 +5,7 @@ import discord
 import datetime
 import json
 import urllib.request
+import os
 
 class Raids:
 	def __init__(self, bot):

@@ -4,6 +4,7 @@ import discord
 import urllib.request
 import ast
 import datetime
+import os
 
 class Armory:
 	def __init__(self, bot):

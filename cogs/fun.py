@@ -14,7 +14,7 @@ class Fun:
 	async def hunters(self):
 		await self.bot.say('<@!207175112691023872> I heard you love hunters!')
 
-	@commands.commands(hidden=True)
+	@commands.command(hidden=True)
 	async def tacos(self):
 		await self.bot.say('https://www.google.com/maps/search/tacos/')
 
