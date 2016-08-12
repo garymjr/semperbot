@@ -4,6 +4,7 @@ from collections import Counter
 import discord
 import asyncio
 import os
+import json
 
 initial_extensions = [
 	'cogs.raids',
@@ -35,6 +36,18 @@ async def on_command(command, ctx):
 async def on_message(message):
 	if message.author.bot:
 		return
+
+	#TODO: make this a separate extension
+	with open('data/stats.json', 'r+') as f:
+		stats = json.load(f)
+		if message.author.id in stats.keys():
+			if 'messages' in stats[message.author.id].keys():
+				stats[message.author.id]['messages'] += 1
+			else:
+				stats[message.author.id]['messages'] = 0
+		else:
+			stats[message.author.id] = {'messages':0}
+
 	await bot.process_commands(message)
 
 if __name__ == '__main__':
