@@ -47,6 +47,7 @@ async def on_message(message):
 				stats[message.author.id]['messages'] = 0
 		else:
 			stats[message.author.id] = {'messages':0}
+		f.write(stats)
 
 	await bot.process_commands(message)
 
