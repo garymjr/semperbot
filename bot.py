@@ -17,7 +17,7 @@ A discord bot for Semper Para Bellum
 '''
 
 prefix = ['!']
-bot = commands.Bot(command_prefix=prefix, description='SemperBot', pm_help=None)
+bot = commands.Bot(command_prefix=prefix, description=description, pm_help=None)
 
 @bot.event
 async def on_ready():
