@@ -30,27 +30,11 @@ async def on_ready():
 @bot.event
 async def on_command(command, ctx):
 	bot.commands_used[command.name] += 1
-	print(bot.commands_used)
 
 @bot.event
 async def on_message(message):
 	if message.author.bot:
 		return
-
-	#TODO: make this a separate extension
-	with open('data/stats.json', 'r') as f:
-		stats = json.load(f)
-
-	if not message.author.id in stats.keys():
-		stats[message.author.id] = {}
-	if 'messages' in stats[message.author.id].keys():
-		stats[message.author.id]['messages'] += 1
-	else:
-		stats[message.author.id]['messages'] = 0
-	stats[message.author.id]['lastMessage'] = message.content
-	stats = json.dumps(stats)
-	with open('data/stats.json', 'w') as f:
-		f.write(stats)
 
 	await bot.process_commands(message)
 
