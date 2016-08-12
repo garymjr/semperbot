@@ -12,6 +12,10 @@ initial_extensions = [
 	'cogs.fun',
 ]
 
+description = '''
+A discord bot for Semper Para Bellum
+'''
+
 prefix = ['!']
 bot = commands.Bot(command_prefix=prefix, description='SemperBot', pm_help=None)
 
