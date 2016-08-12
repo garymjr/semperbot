@@ -41,16 +41,13 @@ async def on_message(message):
 	with open('data/stats.json', 'r') as f:
 		stats = json.load(f)
 
-	if message.author.id in stats.keys():
-		stats[message.author.id]['lastMessage'] = message.content
-		if 'messages' in stats[message.author.id].keys():
-			stats[message.author.id]['messages'] += 1
-		else:
-			stats[message.author.id]['messages'] = 0
+	if not message.author.id in stats.keys():
+		stats[message.author.id] = {}
+	if 'messages' in stats[message.author.id].keys():
+		stats[message.author.id]['messages'] += 1
 	else:
 		stats[message.author.id]['messages'] = 0
 	stats[message.author.id]['lastMessage'] = message.content
-
 	stats = json.dumps(stats)
 	with open('data/stats.json', 'w') as f:
 		f.write(stats)
