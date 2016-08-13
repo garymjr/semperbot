@@ -62,7 +62,7 @@ class Misc:
 		''' Pings the bot to see if it's alive and returns uptime '''
 		now = datetime.now()
 		duration = (now - self.bot.uptime).total_seconds()
-		await self.bot.say("Pong! I've been alive for {}".format(format_timedelta(duration)))
+		await self.bot.say("Pong! I've been alive for {}".format(self.format_timedelta(duration)))
 
 def setup(bot):
 	bot.add_cog(Misc(bot))
