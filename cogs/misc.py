@@ -5,6 +5,7 @@ import discord
 import urllib.request
 import ast
 import json
+import math
 
 class Misc:
 	def __init__(self, bot):
