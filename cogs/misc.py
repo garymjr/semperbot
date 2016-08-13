@@ -12,10 +12,10 @@ class Misc:
 		self.bot = bot
 
 	def format_timedelta(self, duration):
-		days = math.floor(duration / 86400)
-		hours = math.floor((duration % 86400) / 3600)
-		minutes = math.floor(((duration % 86400) % 3600) / 60)
-		seconds = math.floor(((duration % 86400) % 3600) % 60)
+		days, seconds = duration.days, duration.total_seconds()
+		hours = math.floor((seconds / 3600) - (days * 24))
+		minutes = math.floor((seconds / 60) - (hours * 3600))
+		seconds = math.floor(seconds - (minutes * 60))
 		if days > 0:
 			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(days, hours, minutes, seconds)
 		elif hours > 0:
@@ -62,7 +62,7 @@ class Misc:
 	async def ping(self):
 		''' Pings the bot to see if it's alive and returns uptime '''
 		now = datetime.now()
-		duration = (now - self.bot.uptime).total_seconds()
+		duration = now - self.bot.uptime
 		await self.bot.say("Pong! I've been alive for {}".format(self.format_timedelta(duration)))
 
 def setup(bot):
