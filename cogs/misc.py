@@ -10,6 +10,22 @@ class Misc:
 	def __init__(self, bot):
 		self.bot = bot
 
+	def format_timedelta(duration):
+		days = duration // 86400
+		hours = (duration % 86400) // 3600
+		minutes = ((duration % 86400) % 3600) // 60
+		seconds = (((duration % 86400) % 3600) % 60)
+		if days > 0:
+			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(days, hours, minutes, seconds)
+		elif hours > 0:
+			time_string = '{} hours, {} minutes, {} seconds'.format(hours, minutes, seconds)
+		elif minutes > 0:
+			time_string = '{} minutes, {} seconds'.format(days, hours, minutes, seconds)
+		else:
+			time_string = '{} seconds'.format(seconds)
+		return time_string
+
+
 	@commands.command(pass_context=True)
 	async def wiki(self, ctx):
 		''' Displays search results from wowpedia. Use !wiki <search> '''
@@ -47,25 +63,6 @@ class Misc:
 		now = datetime.now()
 		duration = (now - self.bot.uptime).total_seconds()
 		await self.bot.say("Pong! I've been alive for {}".format(format_timedelta(duration)))
-
-	def format_timedelta(duration):
-		days = duration // 86400
-		hours = (duration % 86400) // 3600
-		minutes = ((duration % 86400) % 3600) // 60
-		seconds = (((duration % 86400) % 3600) % 60)
-		if days > 0:
-			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(days, hours, minutes, seconds)
-		elif hours > 0:
-			time_string = '{} hours, {} minutes, {} seconds'.format(hours, minutes, seconds)
-		elif minutes > 0:
-			time_string = '{} minutes, {} seconds'.format(days, hours, minutes, seconds)
-		else:
-			time_string = '{} seconds'.format(seconds)
-		return time_string
-
-
-
-
 
 def setup(bot):
 	bot.add_cog(Misc(bot))
