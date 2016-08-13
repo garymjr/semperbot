@@ -1,10 +1,10 @@
 from discord.ext import commands
 from collections import Counter
+from datetime import datetime
 
 import discord
 import asyncio
 import os
-import json
 
 initial_extensions = [
 	'cogs.raids',
@@ -26,6 +26,7 @@ async def on_ready():
 	print('Username: {}'.format(bot.user.name))
 	print('ID: {}'.format(bot.user.id))
 	print('----------')
+	json.
 
 @bot.event
 async def on_command(command, ctx):
@@ -40,6 +41,7 @@ async def on_message(message):
 
 if __name__ == '__main__':
 	bot.commands_used = Counter()
+	bot.uptime = datetime.now()
 	for ext in initial_extensions:
 		try:
 			bot.load_extension(ext)

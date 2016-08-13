@@ -1,4 +1,5 @@
 from discord.ext import commands
+from datetime import datetime
 
 import discord
 import urllib.request
@@ -39,6 +40,32 @@ class Misc:
 	async def code(self):
 		''' Displays bot github page '''
 		await self.bot.say('https://github.com/garymjr/semperbot')
+
+	@commands.command(hidden=True)
+	async def ping(self):
+		''' Pings the bot to see if it's alive and returns uptime '''
+		now = datetime.now()
+		duration = (now - self.bot.uptime).total_seconds()
+		await self.bot.say("Pong! I've been alive for {}".format(format_timedelta(duration)))
+
+	def format_timedelta(duration):
+		days = duration // 86400
+		hours = (duration % 86400) // 3600
+		minutes = ((duration % 86400) % 3600) // 60
+		seconds = (((duration % 86400) % 3600) % 60)
+		if days > 0:
+			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(days, hours, minutes, seconds)
+		elif hours > 0:
+			time_string = '{} hours, {} minutes, {} seconds'.format(hours, minutes, seconds)
+		elif minutes > 0:
+			time_string = '{} minutes, {} seconds'.format(days, hours, minutes, seconds)
+		else:
+			time_string = '{} seconds'.format(seconds)
+		return time_string
+
+
+
+
 
 def setup(bot):
 	bot.add_cog(Misc(bot))
