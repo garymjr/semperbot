@@ -1,5 +1,6 @@
 from discord.ext import commands
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 import discord
 import urllib.request
@@ -11,19 +12,15 @@ class Misc:
 	def __init__(self, bot):
 		self.bot = bot
 
-	def format_timedelta(self, duration):
-		days, seconds = duration.days, duration.total_seconds()
-		hours = math.floor((seconds / 3600) - (days * 24))
-		minutes = math.floor((seconds / 60) - (hours * 3600))
-		seconds = math.floor(seconds - (minutes * 60))
-		if days > 0:
-			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(days, hours, minutes, seconds)
-		elif hours > 0:
-			time_string = '{} hours, {} minutes, {} seconds'.format(hours, minutes, seconds)
-		elif minutes > 0:
-			time_string = '{} minutes, {} seconds'.format(minutes, seconds)
+	def format_time(self, uptime):
+		if uptime.days > 0:
+			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(uptime.days, uptime.hours, uptime.minutes, uptime.seconds)
+		elif uptime.hours > 0:
+			time_string = '{} hours, {} minutes, {} seconds'.format(uptime.hours, uptime.minutes, uptime.seconds)
+		elif uptime.minutes > 0:
+			time_string = '{} minutes, {} seconds'.format(uptime.minutes, uptime.seconds)
 		else:
-			time_string = '{} seconds'.format(seconds)
+			time_string = '{} seconds'.format(uptime.seconds)
 		return time_string
 
 
@@ -62,8 +59,8 @@ class Misc:
 	async def ping(self):
 		''' Pings the bot to see if it's alive and returns uptime '''
 		now = datetime.now()
-		duration = now - self.bot.uptime
-		await self.bot.say("Pong! I've been alive for {}".format(self.format_timedelta(duration)))
+		uptime = relativedelta(now, self.bot.uptime)
+		await self.bot.say("Pong! I've been alive for {}".format(self.format_time(uptime)))
 
 def setup(bot):
 	bot.add_cog(Misc(bot))
