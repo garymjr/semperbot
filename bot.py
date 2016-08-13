@@ -26,7 +26,6 @@ async def on_ready():
 	print('Username: {}'.format(bot.user.name))
 	print('ID: {}'.format(bot.user.id))
 	print('----------')
-	json.
 
 @bot.event
 async def on_command(command, ctx):
