@@ -14,7 +14,7 @@ class Misc:
 		days = duration // 86400
 		hours = (duration % 86400) // 3600
 		minutes = ((duration % 86400) % 3600) // 60
-		seconds = (((duration % 86400) % 3600) % 60)
+		seconds = math.floor(((duration % 86400) % 3600) % 60)
 		if days > 0:
 			time_string = '{} days, {} hours, {} minutes, {} seconds'.format(days, hours, minutes, seconds)
 		elif hours > 0:
