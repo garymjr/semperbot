@@ -10,7 +10,7 @@ class Misc:
 	def __init__(self, bot):
 		self.bot = bot
 
-	def format_timedelta(duration):
+	def format_timedelta(self, duration):
 		days = duration // 86400
 		hours = (duration % 86400) // 3600
 		minutes = ((duration % 86400) % 3600) // 60
