@@ -21,7 +21,7 @@ class Misc:
 		elif hours > 0:
 			time_string = '{} hours, {} minutes, {} seconds'.format(hours, minutes, seconds)
 		elif minutes > 0:
-			time_string = '{} minutes, {} seconds'.format(days, hours, minutes, seconds)
+			time_string = '{} minutes, {} seconds'.format(minutes, seconds)
 		else:
 			time_string = '{} seconds'.format(seconds)
 		return time_string
