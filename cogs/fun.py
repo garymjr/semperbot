@@ -1,4 +1,5 @@
 from discord.ext import commands
+from cogs.utils import config
 
 import discord
 
@@ -17,6 +18,13 @@ class Fun:
 	@commands.command(hidden=True)
 	async def tacos(self):
 		await self.bot.say('https://www.google.com/maps/search/tacos/')
+
+	@commands.command(hidden=True, pass_context=True)
+	async def stats(self, ctx):
+		author = ctx.message.author
+		stats = self.bot.stats.get(author.id)
+		if stats:
+			await self.bot.say('```Message Count: {}\tWord Count: {}\tPoints: {}```'.format(stats['count'], stats['words'], stats['points']))
 
 def setup(bot):
 	bot.add_cog(Fun(bot))
