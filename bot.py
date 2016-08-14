@@ -13,6 +13,7 @@ initial_extensions = [
 	'cogs.misc',
 	'cogs.armory',
 	'cogs.fun',
+	'cogs.admin',
 ]
 
 description = '''
@@ -38,7 +39,7 @@ async def on_message(message):
 	if message.author.bot:
 		return
 
-	stats = bot.stats.get(message.author.id) if bot.stats.get(message.author.id) != None else {'count':0, 'points':0, 'words':0}
+	stats = bot.stats.get(message.author.id) if bot.stats.get(message.author.id) else {'count':0, 'points':0, 'words':0}
 	if re.match(r'![\w]+', message.content):
 		stats['lastCommand'] = message.content
 		stats['points'] += 1
