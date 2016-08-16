@@ -69,7 +69,7 @@ class Misc:
 		txt += 'A) You put forth effort to be the best at your class you can be.\n\n'
 		txt += 'B) You want to conquer all the end-game raid content Legion offers.\n\n'
 		txt += 'C) You learn from your mistakes. You are able to take criticism, and grow from it.\n\n'
-		txt += 'D) You come prepared, Bringing your own potions/flasks, and you read up on fights\nas needed. You are on time to the raids and you never make excuses. You take personal\nresponsibility for your own performance, never blame others for your own faults.  If you have a problem with a\nfellow raider you\ntake it up with an officer or higher up.'
+		txt += 'D) You come prepared, Bringing your own potions/flasks, and you read up on fights\nas needed. You are on time to the raids and you never make excuses. You take personal\nresponsibility for your own performance, never blame others for your own faults.\nIf you have a problem with a fellow raider you take it up with an officer or higher up.'
 		txt += '```'
 		await self.bot.say(txt)
 
