@@ -55,12 +55,23 @@ class Misc:
 		''' Displays bot github page '''
 		await self.bot.say('https://github.com/garymjr/semperbot')
 
-	@commands.command(hidden=True)
+	@commands.command()
 	async def ping(self):
 		''' Pings the bot to see if it's alive and returns uptime '''
 		now = datetime.now()
 		uptime = relativedelta(now, self.bot.uptime)
 		await self.bot.say("Pong! I've been alive for {}".format(self.format_time(uptime)))
+
+	@commands.command(hidden=True):
+	async def creed(self):
+		txt = '```'
+		txt += 'Raiders Creed:\n'
+		txt += 'A) You put forth effort to be the best at your class you can be.\n'
+		txt += 'B) You want to conquer all the end-game raid content Legion offers.\n'
+		txt += 'C) You learn from your mistakes. You are able to take criticism, and grow from it.\n'
+		txt += 'D) You come prepared, Bringing your own potions and flasks, and you read up on fights\nas needed. You are on time to the raids and you never make excuses. You take personal responsibility for your own performance,\nnever blame others for your own faults.  If you have a problem with a fellow raider you\ntake it up with an officer or higher up.'
+		txt += '```'
+		await self.bot.say(creed)
 
 def setup(bot):
 	bot.add_cog(Misc(bot))
