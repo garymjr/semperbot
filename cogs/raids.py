@@ -98,6 +98,7 @@ class Raids:
 
 	@commands.command(pass_context=True)
 	async def addons(self, ctx):
+		''' Displays a list of addons we use '''
 		member = ctx.message.author
 		''' Displays a list of required raid addons '''
 		with open('addons.json') as f:
