@@ -96,8 +96,9 @@ class Raids:
 		logs = json.loads(logs.read().decode('utf-8'))
 		await self.bot.say('https://www.warcraftlogs.com/reports/{}'.format(logs[-1]['id']))
 
-	@commands.command()
-	async def addons(self):
+	@commands.command(pass_context=True)
+	async def addons(self, ctx):
+		member = ctx.message.author
 		''' Displays a list of required raid addons '''
 		with open('addons.json') as f:
 			addons = json.load(f)
@@ -107,8 +108,8 @@ class Raids:
 		reply += 'Recommended Addons:\n'
 		for addon in addons['recommended']:
 			reply += '\t{}: {}\n'.format(addon['name'], addon['url'])
-		reply += ''
-		await self.bot.say(reply)
+		await self.bot.say('{} Check your PM'.format(member.mention))
+		await self.bot.send_message(member, reply)
 
 def setup(bot):
 	bot.add_cog(Raids(bot))
