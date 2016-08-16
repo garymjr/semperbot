@@ -99,7 +99,8 @@ class Raids:
 	@commands.command()
 	async def addons(self):
 		''' Displays a list of required raid addons '''
-		addons = json.load('addons.json')
+		with open('addons.json') as f:
+			addons = json.load(f)
 		reply = '```Required Addons:\n'
 		for addon in addons['required']:
 			reply += '\t{}: {}\n'.format(addon['name'], addon['url'])
