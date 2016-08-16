@@ -101,13 +101,13 @@ class Raids:
 		''' Displays a list of required raid addons '''
 		with open('addons.json') as f:
 			addons = json.load(f)
-		reply = '```Required Addons:\n'
+		reply = '\nRequired Addons:\n'
 		for addon in addons['required']:
 			reply += '\t{}: {}\n'.format(addon['name'], addon['url'])
 		reply += 'Recommended Addons:\n'
 		for addon in addons['recommended']:
 			reply += '\t{}: {}\n'.format(addon['name'], addon['url'])
-		reply += '```'
+		reply += ''
 		await self.bot.say(reply)
 
 def setup(bot):
