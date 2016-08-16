@@ -96,5 +96,18 @@ class Raids:
 		logs = json.loads(logs.read().decode('utf-8'))
 		await self.bot.say('https://www.warcraftlogs.com/reports/{}'.format(logs[-1]['id']))
 
+	@commands.command()
+	async def addons(self):
+		''' Displays a list of required raid addons '''
+		addons = json.load('addons.json')
+		reply = '```Required Addons:\n'
+		for addon in addons['required']:
+			reply += '\t{}: {}\n'.format(addon['name'], addon['url'])
+		reply += 'Recommended Addons:\n'
+		for addon in addons['recommended']:
+			reply += '\t{}: {}\n'.format(addon['name'], addon['url'])
+		reply += '```'
+		await self.bot.say(reply)
+
 def setup(bot):
 	bot.add_cog(Raids(bot))

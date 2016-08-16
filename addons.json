@@ -1,0 +1,30 @@
+{
+	"required": [
+		{
+			"name": "Deadly Boss Mods",
+			"url": "https://mods.curse.com/addons/wow/deadly-boss-mods"
+		},
+		{
+			"name": "Exorsus Raid Tools",
+			"url": "https://mods.curse.com/addons/wow/exorsus-raid-tools"
+		}
+	],
+	"recommended": [
+		{
+			"name": "GTFO",
+			"url": "https://mods.curse.com/addons/wow/gtfo"
+		},
+		{
+			"name": "WeakAuras 2",
+			"url": "https://mods.curse.com/addons/wow/weakauras-2"
+		},
+		{
+			"name": "Recount",
+			"url": "https://mods.curse.com/addons/wow/recount"
+		},
+		{
+			"name": "Decursive",
+			"url": "https://mods.curse.com/addons/wow/decursive"
+		}
+	]
+}
