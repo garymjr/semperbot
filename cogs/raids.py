@@ -112,5 +112,10 @@ class Raids:
 		await self.bot.say('{} Check your PM'.format(member.mention))
 		await self.bot.send_message(member, reply)
 
+	@commands.command()
+	async def legionprep(self):
+		''' Displays Legion prep guide '''
+		await self.bot.say('https://docs.google.com/spreadsheets/d/1hwvnNZEaSSj9YKui_2P9img-AN44TIoP-QsfA73qlGU/pubhtml#')
+
 def setup(bot):
 	bot.add_cog(Raids(bot))
