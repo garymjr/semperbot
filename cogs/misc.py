@@ -62,7 +62,7 @@ class Misc:
 		uptime = relativedelta(now, self.bot.uptime)
 		await self.bot.say("Pong! I've been alive for {}".format(self.format_time(uptime)))
 
-	@commands.command(hidden=True):
+	@commands.command(hidden=True)
 	async def creed(self):
 		txt = '```'
 		txt += 'Raiders Creed:\n'
