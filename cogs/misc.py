@@ -44,7 +44,7 @@ class Misc:
 			if len(content) > 1:
 				match = None
 				for key in channels.keys():
-					if content[1] in key and match == None:
+					if content[1].lower() in key and match == None:
 						match = key
 				await self.bot.say(channels[match])
 			else:
