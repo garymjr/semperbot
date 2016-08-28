@@ -16,6 +16,10 @@ class Fun:
 		await self.bot.say("<@!207175112691023872> Hey where'd you get those desks?")
 
 	@commands.command(hidden=True)
+	async def no(self):
+		await self.bot.say("<@!125071902556291072> You're wrong.")
+
+	@commands.command(hidden=True)
 	async def hunters(self):
 		await self.bot.say('<@!207175112691023872> I heard you love hunters!')
 
