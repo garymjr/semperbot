@@ -66,7 +66,7 @@ class Raids:
 			if len(content) > 1:
 				match = None
 				for key in guides.keys():
-					if content[1] in key and match == None:
+					if content[1].lower() in key.lower() and match == None:
 						match = key
 				await self.bot.say(guides[match]['guide'])
 			else:
@@ -82,7 +82,7 @@ class Raids:
 			if len(content) > 1:
 				match = None
 				for key in guides.keys():
-					if query in key and match == None:
+					if content[1].lower() in key.lower() and match == None:
 						match = key
 				await self.bot.say(guides[match]['video'])
 			else:

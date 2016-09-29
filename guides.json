@@ -1,94 +1,30 @@
 {
-    "hans'gar and franzok": {
-        "guide": "http://www.icy-veins.com/wow/hans-gar-and-franzok-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=L6cugW3Hzpg&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=4"
-    },
-    "operator thogar": {
-        "guide": "http://www.icy-veins.com/wow/operator-thogar-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=j6PmkNApj_U&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=6"
-    },
-    "gruul": {
-        "guide": "http://www.icy-veins.com/wow/gruul-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=KzlypXVzN-k&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=1"
-    },
-    "flamebender ka'graz": {
-        "guide": "http://www.icy-veins.com/wow/flamebender-ka-graz-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=8bzzcrLRLBs&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=5"
-    },
-    "the iron maidens": {
-        "guide": "http://www.icy-veins.com/wow/the-iron-maidens-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=SMmwxdVJ-NU&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=8"
-    },
-    "oregorger": {
-        "guide": "http://www.icy-veins.com/wow/oregorger-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=PaphvYY3w4w&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=2"
-    },
-    "kromog": {
-        "guide": "http://www.icy-veins.com/wow/kromog-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=ZKQJSDreN4I&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=7"
-    },
-    "blackhand": {
-        "guide": "http://www.icy-veins.com/wow/blackhand-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=Hu53D52LslY&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=9"
-    },
-    "the blast furnace": {
-        "guide": "http://www.icy-veins.com/wow/the-blast-furnace-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=BolcQBIjOBU&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=10"
-    },
-    "beastlord darmac": {
-        "guide": "http://www.icy-veins.com/wow/beastlord-darmac-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=XFZa1dwG3E4&list=PLu3dsh6Bc2HXtv2OQWOwbgiwiTk9s14Ij&index=3"
-    },
-    "hellfire high council": {
-        "guide": "http://www.icy-veins.com/wow/hellfire-high-council-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=UMGLnJuXvpg&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=3"
-    },
-    "fel lord zakuun": {
-        "guide": "http://www.icy-veins.com/wow/fel-lord-zakuun-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=wg0_F2uAu1I&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=10"
-    },
-    "mannoroth": {
-        "guide": "http://www.icy-veins.com/wow/mannoroth-strategy-guide-normal-heroic",
-        "video": "https://www.youtube.com/watch?v=O3MhC4DpqTI&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=12"
-    },
-    "hellfire assault": {
-        "guide": "http://www.icy-veins.com/wow/hellfire-assault-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=eLxeIQCanx0&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=1"
-    },
-    "kilrogg deadeye": {
-        "guide": "http://www.icy-veins.com/wow/kilrogg-deadeye-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=mee3Sv79KL0&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=5"
-    },
-    "socrethar the eternal": {
-        "guide": "http://www.icy-veins.com/wow/socrethar-the-eternal-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=ZZGYt3V9_cY&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=7"
-    },
-    "archimonde": {
-        "guide": "http://www.icy-veins.com/wow/archimonde-strategy-guide-normal-heroic",
-        "video": "https://www.youtube.com/watch?v=wlT3Jaz_GWQ&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=13"
-    },
-    "iron reaver": {
-        "guide": "http://www.icy-veins.com/wow/iron-reaver-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=dZ2zQ9H8lds&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=2"
-    },
-    "gorefiend": {
-        "guide": "http://www.icy-veins.com/wow/gorefiend-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=RpKMt6Hw5KE&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=6"
-    },
-    "xhul'horac": {
-        "guide": "http://www.icy-veins.com/wow/xhul-horac-strategy-guide-normal-heroic",
-        "video": "https://www.youtube.com/watch?v=wBtkH1XLcBY&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=11"
-    },
-    "kormrok": {
-        "guide": "http://www.icy-veins.com/wow/kormrok-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=Ysn91JHy21U&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=4"
-    },
-    "shadow-lord iskar": {
-        "guide": "http://www.icy-veins.com/wow/shadow-lord-iskar-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=8mLKQztFSLY&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=8"
-    },
-    "tyrant velhari": {
-        "guide": "http://www.icy-veins.com/wow/tyrant-velhari-strategy-guide-normal-heroic-mythic",
-        "video": "https://www.youtube.com/watch?v=nkLf9thG01w&list=PLu3dsh6Bc2HUuZ0BleQ-YMCQAmCFs5eyo&index=9"
-    }
+	"Nythendra": {
+		"guide": "http://www.wowhead.com/guides/nythendra-raid-strategy",
+		"video": "https://www.youtube.com/watch?v=lD_9PAoYz4I"
+	},
+	"Elerethe Renferal": {
+		"guide": "http://www.wowhead.com/guides/elerethe-renferal-strategy",
+		"video": "https://www.youtube.com/watch?v=xlm24CZp0aY"
+	},
+	"Il'gynoth": {
+		"guide": "http://www.wowhead.com/guides/ilgynoth-raid-strategy",
+		"video": "https://www.youtube.com/watch?v=92xokhw3AV8"
+	},
+	"Ursoc": {
+		"guide": "http://www.wowhead.com/guides/ursoc-raid-strategy",
+		"video": "https://www.youtube.com/watch?v=Kii_kKhPktw"
+	},
+	"Dragons of Nightmare": {
+		"guide": "http://www.wowhead.com/guides/dragons-of-nightmare-raid-strategy",
+		"video": "https://www.youtube.com/watch?v=SqomSTn0XVs"
+	},
+	"Cenarius": {
+		"guide": "http://www.wowhead.com/guides/cenarius-strategy",
+		"video": "https://www.youtube.com/watch?v=syoEX2DE2go"
+	},
+	"Xavius": {
+		"guide": "http://www.wowhead.com/guides/xavius-strategy",
+		"video": "https://www.youtube.com/watch?v=rRSDfX802i4"
+	}
 }
