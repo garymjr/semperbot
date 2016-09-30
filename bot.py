@@ -1,12 +1,10 @@
 from discord.ext import commands
 from collections import Counter
 from datetime import datetime
-from cogs.utils import config
 
 import discord
 import asyncio
 import os
-import re
 
 initial_extensions = [
 	'cogs.raids',
@@ -39,23 +37,11 @@ async def on_message(message):
 	if message.author.bot:
 		return
 
-	stats = bot.stats.get(message.author.id) if bot.stats.get(message.author.id) else {'count':0, 'points':0, 'words':0}
-	if re.match(r'![\w]+', message.content):
-		stats['lastCommand'] = message.content
-		stats['points'] += 1
-	else:
-		content = message.content.split()
-		stats['count'] += 1
-		stats['words'] += len(content)
-		stats['points'] += int(stats['words'] / stats['count'])
-	bot.stats.set(message.author.id, stats)
-
 	await bot.process_commands(message)
 
 if __name__ == '__main__':
 	bot.commands_used = Counter()
 	bot.uptime = datetime.now()
-	bot.stats = config.Config('stats.json')
 	for ext in initial_extensions:
 		try:
 			bot.load_extension(ext)
