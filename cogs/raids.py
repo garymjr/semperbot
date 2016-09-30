@@ -86,7 +86,7 @@ class Raids:
 						match = key
 				await self.bot.say(guides[match]['video'])
 			else:
-				await self.bot.say('<@!{}> Availavle video guides: {}'.format(author.id, ', '.join(guides.keys())))
+				await self.bot.say('<@!{}> Available video guides: {}'.format(author.id, ', '.join(guides.keys())))
 
 	@commands.command(pass_context=True)
 	async def logs(self, ctx):
