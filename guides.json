@@ -1,30 +1,30 @@
 {
-	"Nythendra": {
-		"guide": "http://www.wowhead.com/guides/nythendra-raid-strategy",
-		"video": "https://www.youtube.com/watch?v=lD_9PAoYz4I"
-	},
-	"Elerethe Renferal": {
-		"guide": "http://www.wowhead.com/guides/elerethe-renferal-strategy",
-		"video": "https://www.youtube.com/watch?v=xlm24CZp0aY"
-	},
-	"Il'gynoth": {
-		"guide": "http://www.wowhead.com/guides/ilgynoth-raid-strategy",
-		"video": "https://www.youtube.com/watch?v=92xokhw3AV8"
-	},
-	"Ursoc": {
-		"guide": "http://www.wowhead.com/guides/ursoc-raid-strategy",
-		"video": "https://www.youtube.com/watch?v=Kii_kKhPktw"
-	},
-	"Dragons of Nightmare": {
-		"guide": "http://www.wowhead.com/guides/dragons-of-nightmare-raid-strategy",
-		"video": "https://www.youtube.com/watch?v=SqomSTn0XVs"
-	},
-	"Cenarius": {
-		"guide": "http://www.wowhead.com/guides/cenarius-strategy",
-		"video": "https://www.youtube.com/watch?v=syoEX2DE2go"
-	},
-	"Xavius": {
-		"guide": "http://www.wowhead.com/guides/xavius-strategy",
-		"video": "https://www.youtube.com/watch?v=rRSDfX802i4"
-	}
+  "Nythendra": {
+    "guide": "http://www.wowhead.com/guides/nythendra-raid-strategy",
+    "video": "https://www.youtube.com/watch?v=lD_9PAoYz4I"
+  },
+  "Elerethe Renferal": {
+    "guide": "http://www.wowhead.com/guides/elerethe-renferal-strategy",
+    "video": "https://www.youtube.com/watch?v=xlm24CZp0aY"
+  },
+  "Il'gynoth": {
+    "guide": "http://www.wowhead.com/guides/ilgynoth-raid-strategy",
+    "video": "https://www.youtube.com/watch?v=92xokhw3AV8"
+  },
+  "Ursoc": {
+    "guide": "http://www.wowhead.com/guides/ursoc-raid-strategy",
+    "video": "https://www.youtube.com/watch?v=Kii_kKhPktw"
+  },
+  "Dragons of Nightmare": {
+    "guide": "http://www.wowhead.com/guides/dragons-of-nightmare-raid-strategy",
+    "video": "https://www.youtube.com/watch?v=SqomSTn0XVs"
+  },
+  "Cenarius": {
+    "guide": "http://www.wowhead.com/guides/cenarius-strategy",
+    "video": "https://www.youtube.com/watch?v=syoEX2DE2go"
+  },
+  "Xavius": {
+    "guide": "http://www.wowhead.com/guides/xavius-strategy",
+    "video": "https://www.youtube.com/watch?v=rRSDfX802i4"
+  }
 }
